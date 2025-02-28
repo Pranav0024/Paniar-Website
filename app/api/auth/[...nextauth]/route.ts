@@ -17,7 +17,8 @@ export const authOptions: any = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials: any) {
+      async authorize(credentials: Record<"email" | "password", string> | undefined) {
+        if (!credentials) return null;
 
         try {
           const user = await prisma.user.findFirst({
@@ -31,9 +32,10 @@ export const authOptions: any = {
               user.password!
             );
             if (isPasswordCorrect) {
-              return user;
+              return user as AuthUser;
             }
           }
+          return null;
         } catch (err: any) {
           throw new Error(err);
         }
