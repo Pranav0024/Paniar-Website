@@ -102,22 +102,6 @@ const DashboardProductDetails = ({
   };
 
   // fetching main product data including other product images
-  const fetchProductData = async () => {
-    fetch(`http://localhost:3001/api/products/${id}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setProduct(data);
-      });
-
-    const imagesData = await fetch(`http://localhost:3001/api/images/${id}`, {
-      cache: "no-store",
-    });
-    const images = await imagesData.json();
-    setOtherImages((currentImages) => images);
-  };
-
   // fetching all product categories. It will be used for displaying categories in select category input
   const fetchCategories = async () => {
     fetch(`http://localhost:3001/api/categories`)
@@ -130,6 +114,22 @@ const DashboardProductDetails = ({
   };
 
   useEffect(() => {
+    const fetchProductData = async () => {
+      fetch(`http://localhost:3001/api/products/${id}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setProduct(data);
+        });
+
+      const imagesData = await fetch(`http://localhost:3001/api/images/${id}`, {
+        cache: "no-store",
+      });
+      const images = await imagesData.json();
+      setOtherImages((currentImages) => images);
+    };
+
     fetchCategories();
     fetchProductData();
   }, [id]);
@@ -265,9 +265,9 @@ const DashboardProductDetails = ({
             type="file"
             className="file-input file-input-bordered file-input-lg w-full max-w-sm"
             onChange={(e) => {
-              const selectedFile = e.target.files[0];
-
-              if (selectedFile) {
+              const files = e.target.files;
+              if (files && files[0]) {
+                const selectedFile = files[0];
                 uploadFile(selectedFile);
                 setProduct({ ...product!, mainImage: selectedFile.name });
               }
