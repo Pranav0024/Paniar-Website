@@ -17,6 +17,8 @@ export const POST = async (request: any) => {
   try {
     await prisma.user.create({
       data: {
+        firstname,
+        lastname,
         id: nanoid() + "",
         email,
         password: hashedPassword,
