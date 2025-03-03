@@ -10,9 +10,7 @@ const DashboardUsers = () => {
   useEffect(() => {
     // sending API request for all users
     fetch("http://localhost:3001/api/users")
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
         setUsers(data);
       });
@@ -45,6 +43,8 @@ const DashboardUsers = () => {
                     <input type="checkbox" className="checkbox" />
                   </label>
                 </th>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th>Email</th>
                 <th>Role</th>
                 <th></th>
@@ -60,6 +60,18 @@ const DashboardUsers = () => {
                         <input type="checkbox" className="checkbox" />
                       </label>
                     </th>
+
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <p>{user?.firstname}</p>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <p>{user?.lastname}</p>
+                      </div>
+                    </td>
 
                     <td>
                       <div className="flex items-center gap-3">
@@ -84,6 +96,8 @@ const DashboardUsers = () => {
             <tfoot>
               <tr>
                 <th></th>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th>Email</th>
                 <th>Role</th>
                 <th></th>

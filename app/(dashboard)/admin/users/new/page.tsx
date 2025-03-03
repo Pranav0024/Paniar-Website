@@ -1,11 +1,13 @@
 "use client";
 import { DashboardSidebar } from "@/components";
 import { isValidEmailAddressFormat } from "@/lib/utils";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 const DashboardCreateNewUser = () => {
   const [userInput, setUserInput] = useState({
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
     role: "user",
@@ -13,6 +15,8 @@ const DashboardCreateNewUser = () => {
 
   const addNewUser = () => {
     if (
+      userInput.firstname.length > 0 &&
+      userInput.lastname.length > 0 &&
       userInput.email.length > 3 &&
       userInput.role.length > 0 &&
       userInput.password.length > 0
@@ -21,7 +25,6 @@ const DashboardCreateNewUser = () => {
         toast.error("You entered invalid email address format");
         return;
       }
-
       if (userInput.password.length > 7) {
         const requestOptions: any = {
           method: "post",
@@ -30,22 +33,23 @@ const DashboardCreateNewUser = () => {
         };
         fetch(`http://localhost:3001/api/users`, requestOptions)
           .then((response) => {
-            if(response.status === 201){
+            if (response.status === 201) {
               return response.json();
-
-            }else{
-              
+            } else {
               throw Error("Error while creating user");
             }
           })
           .then((data) => {
             toast.success("User added successfully");
             setUserInput({
+              firstname: "",
+              lastname: "",
               email: "",
               password: "",
               role: "user",
             });
-          }).catch(error => {
+          })
+          .catch((error) => {
             toast.error("Error while creating user");
           });
       } else {
@@ -64,6 +68,36 @@ const DashboardCreateNewUser = () => {
         <div>
           <label className="form-control w-full max-w-xs">
             <div className="label">
+              <span className="label-text">First Name:</span>
+            </div>
+            <input
+              type="text"
+              className="input input-bordered w-full max-w-xs"
+              value={userInput.firstname}
+              onChange={(e) =>
+                setUserInput({ ...userInput, firstname: e.target.value })
+              }
+            />
+          </label>
+        </div>
+        <div>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Last Name:</span>
+            </div>
+            <input
+              type="text"
+              className="input input-bordered w-full max-w-xs"
+              value={userInput.lastname}
+              onChange={(e) =>
+                setUserInput({ ...userInput, lastname: e.target.value })
+              }
+            />
+          </label>
+        </div>
+        <div>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
               <span className="label-text">Email:</span>
             </div>
             <input
@@ -76,7 +110,6 @@ const DashboardCreateNewUser = () => {
             />
           </label>
         </div>
-
         <div>
           <label className="form-control w-full max-w-xs">
             <div className="label">
@@ -92,15 +125,14 @@ const DashboardCreateNewUser = () => {
             />
           </label>
         </div>
-
         <div>
           <label className="form-control w-full max-w-xs">
             <div className="label">
-              <span className="label-text">User role: </span>
+              <span className="label-text">Role:</span>
             </div>
             <select
               className="select select-bordered"
-              defaultValue={userInput.role}
+              value={userInput.role}
               onChange={(e) =>
                 setUserInput({ ...userInput, role: e.target.value })
               }
@@ -110,14 +142,13 @@ const DashboardCreateNewUser = () => {
             </select>
           </label>
         </div>
-
-        <div className="flex gap-x-2">
+        <div className="flex gap-x-2 max-sm:flex-col">
           <button
             type="button"
-            className="uppercase bg-blue-500 px-10 py-5 text-lg border border-black border-gray-300 font-bold text-white shadow-sm hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2"
+            className="btn btn-primary"
             onClick={addNewUser}
           >
-            Create user
+            Add User
           </button>
         </div>
       </div>

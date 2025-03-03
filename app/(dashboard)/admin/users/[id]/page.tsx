@@ -13,10 +13,12 @@ const DashboardSingleUserPage = ({
   params: { id },
 }: DashboardUserDetailsProps) => {
   const [userInput, setUserInput] = useState<{
+    name: string;
     email: string;
     newPassword: string;
     role: string;
   }>({
+    name: "",
     email: "",
     newPassword: "",
     role: "",
@@ -43,6 +45,7 @@ const DashboardSingleUserPage = ({
 
   const updateUser = async () => {
     if (
+      userInput.name.length > 0 &&
       userInput.email.length > 3 &&
       userInput.role.length > 0 &&
       userInput.newPassword.length > 0
@@ -92,6 +95,7 @@ const DashboardSingleUserPage = ({
       })
       .then((data) => {
         setUserInput({
+          name: data?.name,
           email: data?.email,
           newPassword: "",
           role: data?.role,
@@ -104,6 +108,23 @@ const DashboardSingleUserPage = ({
       <DashboardSidebar />
       <div className="flex flex-col gap-y-7 xl:pl-5 max-xl:px-5 w-full">
         <h1 className="text-3xl font-semibold">User details</h1>
+        
+        <div>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Name:</span>
+            </div>
+            <input
+              type="email"
+              className="input input-bordered w-full max-w-xs"
+              value={userInput.name}
+              onChange={(e) =>
+                setUserInput({ ...userInput, name: e.target.value })
+              }
+            />
+          </label>
+        </div>
+        
         <div>
           <label className="form-control w-full max-w-xs">
             <div className="label">
