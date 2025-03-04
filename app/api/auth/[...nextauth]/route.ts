@@ -7,6 +7,7 @@ import bcrypt from "bcryptjs";
 import prisma from "@/utils/db";
 import { nanoid } from "nanoid";
 import { NextResponse } from "next/server";
+import { Session } from "inspector";
 
 interface AuthUser extends NextAuthUser {
   firstname: string;
@@ -64,6 +65,7 @@ export const authOptions: any = {
         session.user.firstname = token.firstname;
         session.user.lastname = token.lastname;
       }
+      console.log("Session", session, token, user);
       return session;
     },
     async jwt({ token, user }: { token: any; user?: AuthUser }) {

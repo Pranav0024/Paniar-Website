@@ -19,7 +19,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaRegUser } from "react-icons/fa6";
 
 const HeaderTop = () => {
-  const { data: session }: any = useSession();
+  const { data: session } = useSession();
   console.log(session);
 
   const handleLogout = () => {
