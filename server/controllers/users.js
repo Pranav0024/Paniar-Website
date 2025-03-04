@@ -107,6 +107,19 @@ async function getUserByEmail(request, response) {
   return response.status(200).json(user);
 }
 
+async function getUserByName(request, response) {
+  const { email } = request.params;
+  const user = await prisma.user.findUnique({
+    where: {
+      firstname: firstname,
+    },
+  });
+  if (!user) {
+    return response.status(404).json({ error: "User not found" });
+  }
+  return response.status(200).json(user);
+}
+
 module.exports = {
   createUser,
   updateUser,
@@ -114,4 +127,5 @@ module.exports = {
   getUser,
   getAllUsers,
   getUserByEmail,
+  getUserByName,
 };

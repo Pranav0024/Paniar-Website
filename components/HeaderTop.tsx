@@ -20,6 +20,7 @@ import { FaRegUser } from "react-icons/fa6";
 
 const HeaderTop = () => {
   const { data: session }: any = useSession();
+  console.log(session);
 
   const handleLogout = () => {
     setTimeout(() => signOut(), 1000);
@@ -39,30 +40,32 @@ const HeaderTop = () => {
           </li>
         </ul>
         <ul className="flex items-center gap-x-5 h-full max-[370px]:text-sm max-[370px]:gap-x-2 font-semibold">
-          {!session ? ( 
-          <>
-          <li className="flex items-center">
-            <Link href="/login" className="flex items-center gap-x-2 font-semibold">
-              <FaRegUser className="text-white" />
-              <span>Login</span>
-            </Link>
-          </li>
-          <li className="flex items-center">
-            <Link href="/register" className="flex items-center gap-x-2 font-semibold">
-              <FaRegUser className="text-white" />
-              <span>Register</span>
-            </Link>
-          </li>
-          </>
-          ) :  (<>
-          <span className="ml-10 text-base">{session.user?.email}</span>
-          <li className="flex items-center">
-            <button onClick={() => handleLogout()} className="flex items-center gap-x-2 font-semibold">
-              <FaRegUser className="text-white" />
-              <span>Log out</span>
-            </button>
-          </li>
-          </>)}
+          {!session ? (
+            <>
+              <li className="flex items-center">
+                <Link href="/login" className="flex items-center gap-x-2 font-semibold">
+                  <FaRegUser className="text-white" />
+                  <span>Login</span>
+                </Link>
+              </li>
+              <li className="flex items-center">
+                <Link href="/register" className="flex items-center gap-x-2 font-semibold">
+                  <FaRegUser className="text-white" />
+                  <span>Register</span>
+                </Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <span className="ml-10 text-base">Hello! {session.user?.firstname}</span>
+              <li className="flex items-center">
+                <button onClick={() => handleLogout()} className="flex items-center gap-x-2 font-semibold">
+                  <FaRegUser className="text-white" />
+                  <span>Log out</span>
+                </button>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 import { NextResponse } from "next/server";
 
 export const POST = async (request: any) => {
-  const { email, password } = await request.json();
+  const { firstname, lastname, email, password } = await request.json();
 
   const existingUser = await prisma.user.findFirst({ where: { email } });
 

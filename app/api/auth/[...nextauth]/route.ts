@@ -6,6 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 import prisma from "@/utils/db";
 import { nanoid } from "nanoid";
+import { NextResponse } from "next/server";
 
 export const authOptions: any = {
   // Configure one or more authentication providers
@@ -52,6 +53,21 @@ export const authOptions: any = {
     // ...add more providers here if you want. You can find them on nextauth website.
   ],
   callbacks: {
+    async session({ session, token, user }) {
+      // Include firstname and lastname in the session
+      if (token) {
+        session.user.firstname = token.firstname;
+        session.user.lastname = token.lastname;
+      }
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.firstname = user.firstname;
+        token.lastname = user.lastname;
+      }
+      return token;
+    },
     async signIn({ user, account }: { user: AuthUser; account: Account }) {
       if (account?.provider == "credentials") {
         return true;

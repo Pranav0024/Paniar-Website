@@ -24,7 +24,7 @@ const RegisterPage = () => {
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const name = e.target[0].value;
+    const firstname = e.target[0].value;
     const lastname = e.target[1].value;
     const email = e.target[2].value;
     const password = e.target[3].value;
@@ -56,7 +56,7 @@ const RegisterPage = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name,
+          firstname,
           lastname,
           email,
           password,
@@ -97,16 +97,17 @@ const RegisterPage = () => {
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
-                  htmlFor="name"
+                  htmlFor="firstname"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Name
+                  First Name
                 </label>
                 <div className="mt-2">
                   <input
-                    id="name"
-                    name="name"
+                    id="firstname"
+                    name="firstname"
                     type="text"
+                    autoComplete="given-name"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -125,6 +126,7 @@ const RegisterPage = () => {
                     id="lastname"
                     name="lastname"
                     type="text"
+                    autoComplete="family-name"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
