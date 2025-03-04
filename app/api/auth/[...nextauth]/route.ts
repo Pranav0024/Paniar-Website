@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import { Account, User as AuthUser } from "next-auth";
+import { Account, User as NextAuthUser } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
@@ -7,6 +7,11 @@ import bcrypt from "bcryptjs";
 import prisma from "@/utils/db";
 import { nanoid } from "nanoid";
 import { NextResponse } from "next/server";
+
+interface AuthUser extends NextAuthUser {
+  firstname: string;
+  lastname: string;
+}
 
 export const authOptions: any = {
   // Configure one or more authentication providers
@@ -53,7 +58,7 @@ export const authOptions: any = {
     // ...add more providers here if you want. You can find them on nextauth website.
   ],
   callbacks: {
-    async session({ session, token, user }) {
+    async session({ session, token, user }: { session: any; token: any; user: AuthUser }) {
       // Include firstname and lastname in the session
       if (token) {
         session.user.firstname = token.firstname;
@@ -61,7 +66,7 @@ export const authOptions: any = {
       }
       return session;
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: any; user?: AuthUser }) {
       if (user) {
         token.firstname = user.firstname;
         token.lastname = user.lastname;
