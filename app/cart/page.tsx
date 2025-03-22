@@ -148,7 +148,7 @@ const CartPage = () => {
                       />
                     </a>
                   </dt>
-                  <dd className="text-sm font-medium text-gray-900">₹0.00<span style={{ textDecoration: "line-through" }}>₹50.00</span></dd>
+                  <dd className="text-sm font-medium text-gray-900">₹0 <span style={{ textDecoration: "line-through" }}>₹50</span></dd>
                 </div>
                
                 <div className="flex items-center justify-between border-t border-gray-200 pt-4">

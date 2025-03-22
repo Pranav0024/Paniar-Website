@@ -233,18 +233,14 @@ const CheckoutPage = () => {
 
               <div className="flex items-center justify-between">
                 <dt className="text-gray-600">Shipping</dt>
-                <dd>₹5</dd>
+                <dd>₹0 <span style={{ textDecoration: "line-through" }}>₹50.00</span></dd>
               </div>
 
-              <div className="flex items-center justify-between">
-                <dt className="text-gray-600">Taxes</dt>
-                <dd>₹{total / 5}</dd>
-              </div>
 
               <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                 <dt className="text-base">Total</dt>
                 <dd className="text-base">
-                  ₹{total === 0 ? 0 : Math.round(total + total / 5 + 5)}
+                  ₹{total === 0 ? 0 : Math.round(total)}
                 </dd>
               </div>
             </dl>

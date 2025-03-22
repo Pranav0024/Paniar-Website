@@ -10,6 +10,7 @@
 
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -24,7 +25,9 @@ const Hero = () => {
           </p>
           <div className="flex gap-x-1 max-lg:flex-col max-lg:gap-y-1">
             <button className="bg-white text-blue-600 font-bold px-12 py-3 max-lg:text-xl max-sm:text-lg hover:bg-gray-100">
-              BUY NOW
+              <Link href="/shop">
+                Buy Now
+              </Link>
             </button>
             <button className="bg-white text-blue-600 font-bold px-12 py-3 max-lg:text-xl max-sm:text-lg hover:bg-gray-100">
               LEARN MORE
