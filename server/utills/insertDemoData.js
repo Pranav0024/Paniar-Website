@@ -1,10 +1,11 @@
 const { PrismaClient } = require("@prisma/client");
+const { v4: uuidv4 } = require("uuid");
 
 const prisma = new PrismaClient();
 
 const demoProducts = [
   {
-    id: "1",
+    id: uuidv4(),
     title: "Smart phone",
     price: 22,
     rating: 5,
@@ -16,7 +17,7 @@ const demoProducts = [
     inStock: 0,
   },
   {
-    id: "2",
+    id: uuidv4(),
     title: "SLR camera",
     price: 24,
     rating: 0,
@@ -28,7 +29,7 @@ const demoProducts = [
     inStock: 0,
   },
   {
-    id: "3",
+    id: uuidv4(),
     title: "Mixer grinder",
     price: 25,
     rating: 4,
@@ -40,7 +41,7 @@ const demoProducts = [
     inStock: 1,
   },
   {
-    id: "4",
+    id: uuidv4(),
     title: "Phone gimbal",
     price: 21,
     rating: 5,
@@ -52,7 +53,7 @@ const demoProducts = [
     inStock: 1,
   },
   {
-    id: "5",
+    id: uuidv4(),
     title: "Tablet keyboard",
     price: 52,
     rating: 4,
@@ -64,7 +65,7 @@ const demoProducts = [
     inStock: 1,
   },
   {
-    id: "6",
+    id: uuidv4(),
     title: "Wireless earbuds",
     price: 74,
     rating: 3,
@@ -76,7 +77,7 @@ const demoProducts = [
     inStock: 1,
   },
   {
-    id: "7",
+    id: uuidv4(),
     title: "Party speakers",
     price: 35,
     rating: 5,
@@ -88,7 +89,7 @@ const demoProducts = [
     inStock: 1,
   },
   {
-    id: "8",
+    id: uuidv4(),
     title: "Slow juicer",
     price: 69,
     rating: 5,
@@ -100,7 +101,7 @@ const demoProducts = [
     inStock: 1,
   },
   {
-    id: "9",
+    id: uuidv4(),
     title: "Wireless headphones",
     price: 89,
     rating: 3,
@@ -112,7 +113,7 @@ const demoProducts = [
     inStock: 1,
   },
   {
-    id: "10",
+    id: uuidv4(),
     title: "Smart watch",
     price: 64,
     rating: 3,
@@ -124,7 +125,7 @@ const demoProducts = [
     inStock: 1,
   },
   {
-    id: "11",
+    id: uuidv4(),
     title: "Notebook horizon",
     price: 52,
     rating: 5,
@@ -136,7 +137,7 @@ const demoProducts = [
     inStock: 1,
   },
   {
-    id: "12",
+    id: uuidv4(),
     title: "Mens trimmer",
     price: 54,
     rating: 5,

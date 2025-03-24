@@ -146,9 +146,8 @@ const CheckoutPage = () => {
     productId: string,
     productQuantity: number
   ) => {
-    // sending API POST request for the table customer_order_product that does many to many relatioship for order and product
     const response = await fetch("http://localhost:3001/api/order-product", {
-      method: "POST", // or 'PUT'
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
