@@ -1,13 +1,13 @@
+// test-db.js
 const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({ log: ['query'] });
 
-async function main() {
-  const products = await prisma.product.findMany();
-  console.log(products);
+async function test() {
+  try {
+    const result = await prisma.$queryRaw`SELECT version()`;
+    console.log("PostgreSQL version:", result);
+  } catch (error) {
+    console.error("Connection error:", error);
+  }
 }
-
-main()
-  .catch((e) => console.error(e))
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+test();
