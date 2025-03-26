@@ -14,7 +14,11 @@ const nextConfig = {
   },
   typescript: {
     ignoreBuildErrors: true, // Ignore TypeScript errors
-  }
+  },
+
+  server: {
+    port: process.env.PORT || 3000, // Use Render's PORT or default to 3000
+  },
 };
 
 export default nextConfig;
