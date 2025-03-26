@@ -3,20 +3,20 @@ import prisma from "@/utils/db";
 import bcrypt from "bcryptjs";
 
 const externalAuthOptions = {
-    providers: [
-        CredentialsProvider({
-            id: "credentials",
-            name: "Credentials",
-            credentials: {
-                email: { label: "Email", type: "text" },
-                password: { label: "Password", type: "password" },
-            },
-            async authorize(credentials) {
-                if (!credentials) return null;
+  providers: [
+    CredentialsProvider({
+      id: "credentials",
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        if (!credentials) return null;
 
-                const user = await prisma.user.findFirst({
-                    where: { email: credentials.email },
-                });
+        const user = await prisma.user.findFirst({
+          where: { email: credentials.email },
+        });
 
                 if (user) {
                     const isPasswordCorrect = await bcrypt.compare(
