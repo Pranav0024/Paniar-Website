@@ -1,4 +1,5 @@
-import NextAuth from "next-auth";
+import NextAuth from 'next-auth';
+import externalAuthOptions from '@/lib/configs/auth/authOptions';
 import { Account, User as NextAuthUser } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -14,7 +15,7 @@ interface AuthUser extends NextAuthUser {
   lastname: string;
 }
 
-export const authOptions: any = {
+const authOptions: any = externalAuthOptions ?? {
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
@@ -125,4 +126,5 @@ export const authOptions: any = {
 };
 
 export const handler = NextAuth(authOptions);
+export { authOptions };
 export { handler as GET, handler as POST };
