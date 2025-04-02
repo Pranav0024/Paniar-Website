@@ -5,7 +5,7 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'placehold.co',
-        port: ""
+        port: "",
       },
     ],
   },
@@ -15,10 +15,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true, // Ignore TypeScript errors
   },
-
-  server: {
-    port: process.env.PORT || 3000, // Use Render's PORT or default to 3000
-  },
+  // Removed the invalid 'server' configuration
 };
 
 export default nextConfig;
